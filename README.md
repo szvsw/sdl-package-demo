@@ -1,6 +1,26 @@
 # An Example Python Package
 
-This repo is a simple demonstration of how to create and publish a Python package.
+This repo is a simple demonstration of how to create and publish a Python package to PyPI (the Python Package Index, pronounced "pie-pee-eye", but I prefer `pie-pie`, because who doesn't like pie).
+
+## PyPI Account Setup
+
+Before getting started, please create an account at both `test.pypi.org` AND `pypi.org`.
+
+Next, create a file called `.pypirc`. Add the following to it:
+
+```
+[pypi]
+  username = __token__
+  password = <the full pypi token string including the pypi- prefix>
+
+[testpypi]
+  username = __token__
+  password = <the full testpypi token string including the pypi- prefix>
+```
+
+We will replace the passwords once we have generated each of the tokens. Save this file in your home directory, e.g. `C:\Users\YourName` for Windows. This will allow `twine` (the PyPI publishing tool) to automatically log you in whenever you upload a package.
+
+After you have created and verified your account(s), navigate to the `Account Settings` page and find the `API Tokens` section. Click `Add API Token`, and then enter a name (e.g. `pypi-global-api-token`) and select `Entire Account` for the scope. Your token should now appear. Edit your `.pypirc` file in the appropriate location.
 
 ## Create the Repo
 
@@ -99,3 +119,15 @@ Finally, let's add some additional metadata by creating a subsection for the `ur
 Documentation = "https://somesite.com"
 Repository = "https://github.com/username/repository"
 ```
+
+There's a lot more advanced configuration we can do, plugins that can be installed, etc etc, but that should be enough for now!
+
+## Build the Package
+
+Install the `pip` packages `build` (for creating the disribution files) and `twine` (for publishing the package to PyPI):
+
+```
+pip install build
+```
+
+From the root directory of your project, run
