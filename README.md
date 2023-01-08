@@ -22,7 +22,9 @@ We will replace the passwords once we have generated each of the tokens. Save th
 
 After you have created and verified your account(s), navigate to the `Account Settings` page and find the `API Tokens` section. Click `Add API Token`, and then enter a name (e.g. `pypi-global-api-token`) and select `Entire Account` for the scope. Your token should now appear. Edit your `.pypirc` file in the appropriate location.
 
-## Create the Repo
+## Create the Repo for your Package
+
+If you do not yet have a repo for your package, create one!
 
 1. Create a repository on GitHub
 1. For your `.gitignore`, choose the Python option.
@@ -52,6 +54,8 @@ my-package/
 ├─ .gitignore
 ├─ pyproject.toml
 ```
+
+Your package files should be copied into the `my_package` subfolder (feel free to rename). For now, you can leave the `tests` folder empty. Your `.gitignore` should probably follow a standard Python [.gitignore] (https://github.com/github/gitignore/blob/main/Python.gitignore). Add your license text (e.g. [MIT License](https://opensource.org/licenses/MIT)) to the license file.
 
 ## Populate pyproject.toml
 
@@ -122,12 +126,43 @@ Repository = "https://github.com/username/repository"
 
 There's a lot more advanced configuration we can do, plugins that can be installed, etc etc, but that should be enough for now!
 
-## Build the Package
+## Build and Publish the Package
 
 Install the `pip` packages `build` (for creating the disribution files) and `twine` (for publishing the package to PyPI):
 
 ```
-pip install build
+pip install build twine
 ```
 
-From the root directory of your project, run
+From the root directory of your project, run the following command to build your dist and wheel files!
+
+```
+python -m build
+```
+
+When `build` is complete, you should now see a `dist` file in your package directory.
+
+That was easy! Next, let's publish it. We will start by publishing to `test.pypi.org` in order to make sure everything is working.
+
+```
+python -m twine upload --repository testpypi dist/*
+```
+
+When it completes, head over to `test.pypi.org` and check it out! It's now ready to be installed (though the `testpypi` index is pruned regularly). You can install it via `pip` as you would any other package, but you will need to specify that it is coming from `testpypi` with the `--index-url` flag.
+
+```
+pip install --index-url https://test.pypi.org/simple/ your-package-name
+```
+
+Finally, let's publish it to the real Python PI:
+
+```
+twine upload dist/*
+```
+
+## Additional Resources
+
+- [Setuptools User Guide](https://setuptools.pypa.io/en/latest/userguide/index.html)
+- [More in-depth instructions on package creation and publication](https://www.freecodecamp.org/news/how-to-create-and-upload-your-first-python-package-to-pypi/)
+- [And some more...](https://realpython.com/pypi-publish-python-package/#create-a-small-python-package)
+- [Some info on .pypirc](https://packaging.python.org/en/latest/specifications/pypirc/)
