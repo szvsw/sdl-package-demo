@@ -55,7 +55,7 @@ my-package/
 ├─ pyproject.toml
 ```
 
-Your package files should be copied into the `my_package` subfolder (feel free to rename). For now, you can leave the `tests` folder empty. Your `.gitignore` should probably follow a standard Python [.gitignore] (https://github.com/github/gitignore/blob/main/Python.gitignore). Add your license text (e.g. [MIT License](https://opensource.org/licenses/MIT)) to the license file.
+Your package files should be copied into the `my_package` subfolder (feel free to rename). For now, you can leave the `tests` folder empty. Your `.gitignore` should probably follow a standard Python [.gitignore](https://github.com/github/gitignore/blob/main/Python.gitignore). Add your license text (e.g. [MIT License](https://opensource.org/licenses/MIT)) to the license file.
 
 ## Populate pyproject.toml
 
